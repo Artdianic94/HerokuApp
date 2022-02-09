@@ -21,6 +21,6 @@ public class AddRemoveTest extends BaseTest {
         List<WebElement> deleteElementsAfterDelete = driver.findElements(By.xpath("//button[@onclick='deleteElement()']"));
         int numberOfDeleteAfterDelete = deleteElementsAfterDelete.size();
         System.out.println(numberOfDeleteAfterDelete);
-        Assert.assertNotEquals(numberOfDeleteBeforeDelete,numberOfDeleteAfterDelete,"Something's wrong");
+        Assert.assertNotEquals(numberOfDeleteBeforeDelete, numberOfDeleteAfterDelete, "Something's wrong");
     }
 }

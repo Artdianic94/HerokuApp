@@ -6,8 +6,7 @@ import java.util.Properties;
 
 
 public class PropertiesManager {
-
-    private String propertyFilePath;
+    private final String propertyFilePath;
     private Properties prop;
 
     public PropertiesManager() {

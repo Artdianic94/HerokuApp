@@ -15,19 +15,18 @@ public class NotificationMessagesTest extends BaseTest {
     @Test
     public void notificationMessageTest() {
         driver.findElement(By.xpath("//a[text() = 'Click here']")).click();
-        String actualAlertMessage = driver.findElement(By.id("flash")).getText();
-        String expectedAlertMessage = "Action successful";
+        String actualAlertMessage = driver.findElement(By.id("flash")).getText().replaceAll("\n", " ");
+        String expectedAlertMessage = "Action successful ×";
         Assert.assertEquals(actualAlertMessage, expectedAlertMessage, "Messages are not equal");
     }
 
     @Test
     public void notificationTwoMessageTest() {
-        for (int i = 0; i < 2; i++) {
-            driver.findElement(By.xpath("//a[text() = 'Click here']")).click();
-        }
-        String actualAlertMessage = driver.findElement(By.id("flash")).getText();
-        String expectedAlertMessage = "Action unsuccessful, please try again";
-        Assert.assertEquals(actualAlertMessage, expectedAlertMessage, "Messages are not equal");
+        driver.findElement(By.xpath("//a[text() = 'Click here']")).click();
+        String actualAlertMessage = driver.findElement(By.id("flash")).getText().replaceAll("\n", " ");
+        System.out.println(actualAlertMessage);
+        String expectedAlertMessage = "Action unsuccessful, please try again ×";
+        Assert.assertNotEquals(actualAlertMessage, expectedAlertMessage, "Messages are equal");
     }
 
 }

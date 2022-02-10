@@ -26,7 +26,7 @@ public class NotificationMessagesTest extends BaseTest {
         String actualAlertMessage = driver.findElement(By.id("flash")).getText().replaceAll("\n", " ");
         System.out.println(actualAlertMessage);
         String expectedAlertMessage = "Action unsuccessful, please try again ×";
-        Assert.assertNotEquals(actualAlertMessage, expectedAlertMessage, "Messages are equal");
+        Assert.assertEquals(actualAlertMessage, expectedAlertMessage, "Messages are equal");
     }
 
 }

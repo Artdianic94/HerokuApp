@@ -1,41 +1,43 @@
 package tests;
 
-import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import staticdata.Constants;
+import pagefactorypages.CheckBoxPage;
 
 public class CheckBoxTest extends BaseTest {
+    CheckBoxPage checkBoxPage;
+
     @BeforeMethod
     public void herokuCheckbox() {
-        driver.get(Constants.HEROKU_APP_CHECKBOX_URL);
+        checkBoxPage = new CheckBoxPage(driver);
+        checkBoxPage.openCheckboxPage();
     }
 
     @Test
     public void firstUncheckedTest() {
-        boolean checkboxSelected = driver.findElement(By.xpath("//text()[normalize-space()='checkbox 1']/preceding-sibling::input")).isSelected();
+        boolean checkboxSelected = checkBoxPage.firstCheckboxIsSelected();
         Assert.assertFalse(checkboxSelected, "First checkbox is checked");
     }
 
     @Test
     public void firstCheckedTest() {
-        driver.findElement(By.xpath("//text()[normalize-space()='checkbox 1']/preceding-sibling::input")).click();
-        boolean checkboxSelected = driver.findElement(By.xpath("//text()[normalize-space()='checkbox 1']/preceding-sibling::input")).isSelected();
+        checkBoxPage.firstCheckboxClick();
+        boolean checkboxSelected = checkBoxPage.firstCheckboxIsSelected();
         Assert.assertTrue(checkboxSelected, "First checkbox is unchecked");
     }
 
     @Test
     public void secondCheckedTest() {
-        boolean checkboxSelected = driver.findElement(By.xpath("//text()[normalize-space()='checkbox 1']/following-sibling::input")).isSelected();
+        boolean checkboxSelected = checkBoxPage.firstCheckboxIsSelected();
         Assert.assertTrue(checkboxSelected, "Second checkbox is unchecked");
     }
 
     @Test
     public void secondUncheckedTest() {
-        driver.findElement(By.xpath("//text()[normalize-space()='checkbox 1']/preceding-sibling::input")).click();
-        driver.findElement(By.xpath("//text()[normalize-space()='checkbox 2']/preceding::br/following::input")).click();
-        boolean checkboxSelected = driver.findElement(By.xpath("//text()[normalize-space()='checkbox 2']/preceding::br/following::input")).isSelected();
+        checkBoxPage.firstCheckboxClick();
+        checkBoxPage.secondCheckboxClick();
+        boolean checkboxSelected = checkBoxPage.secondCheckboxIsSelected();
         Assert.assertFalse(checkboxSelected, "Second checkbox is checked");
     }
 }

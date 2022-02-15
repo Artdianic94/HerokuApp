@@ -1,19 +1,21 @@
 package tests;
 
-import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import staticdata.Constants;
+import pagefactorypages.SortablePage;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SortableTest extends BaseTest {
+    SortablePage sortablePage;
+
     @Test
     public void nameAndLastNameTest() {
-        driver.get(Constants.SORTABLE_DATA_TABLES);
-        String lastNameOnPage = driver.findElement(By.xpath("//table[@id='table1']//td[text()='fbach@yahoo.com']/parent::tr/td[1]")).getText();
-        String firstNameOnPage = driver.findElement(By.xpath("//table[@id='table1']//td[text()='fbach@yahoo.com']/parent::tr/td[2]")).getText();
+        sortablePage = new SortablePage(driver);
+        sortablePage.openSortablePage();
+        String lastNameOnPage = sortablePage.getLNameOnPage();
+        String firstNameOnPage = sortablePage.getFNameOnPage();
         List<String> namesOnPage = new ArrayList<>();
         namesOnPage.add(0, lastNameOnPage);
         namesOnPage.add(1, firstNameOnPage);
@@ -25,9 +27,10 @@ public class SortableTest extends BaseTest {
 
     @Test
     public void dueWebSiteTest() {
-        driver.get(Constants.SORTABLE_DATA_TABLES);
-        String dueOnPage = driver.findElement(By.xpath("//table[@id='table2']//td[text()='fbach@yahoo.com']/parent::tr/td[4]")).getText();
-        String webSiteOnPage = driver.findElement(By.xpath("//table[@id='table2']//td[text()='fbach@yahoo.com']/parent::tr/td[5]")).getText();
+        sortablePage = new SortablePage(driver);
+        sortablePage.openSortablePage();
+        String dueOnPage = sortablePage.getDueOnPage();
+        String webSiteOnPage = sortablePage.getWebSiteOnPage();
         List<String> namesOnPage = new ArrayList<>();
         namesOnPage.add(0, dueOnPage);
         namesOnPage.add(1, webSiteOnPage);
